@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -139,14 +140,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyLazyColumn(modifier: Modifier) {
     val itemList = listOf(
-        Asignatura("Historia", R.drawable.history),
+        Asignatura("Historia", R.drawable.historia),
         Asignatura("Matematicas", R.drawable.matematicas),
     )
+    val repeatedItemList = generateSequence { itemList }.flatten().take(1000).toList();
+
     LazyColumn (modifier = modifier.padding(horizontal = 15.dp).fillMaxWidth()) {
-        items(itemList) { asign ->
+        items(repeatedItemList) { asign ->
             Column(Modifier.fillMaxWidth()){
-                Text(asign.asignatura,
-                    Modifier.align(Alignment.CenterHorizontally))
+                Text(asign.asignatura, Modifier.align(Alignment.CenterHorizontally))
                 Box(
                     Modifier
                         .fillMaxWidth()
